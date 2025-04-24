@@ -1,8 +1,12 @@
 # Pleias-RAG-Library
 
-A library for API interaction with custom Pleias RAG models that generate high-quality, factual responses backed up by literal quotations.
+A library for API interaction with custom Pleias RAG models that generate high-quality, factual responses backed up by literal quotations. Currently this includes two models:
+* [Pleias-RAG-350M](https://huggingface.co/PleIAs/Pleias-RAG-350M), a phone-sized SLM with 350 million parameters.
+* [Pleias-RAG-1B](https://huggingface.co/PleIAs/Pleias-RAG-1B), a 1.2B parameters SLM.
 
-Pleias-RAG-Library was developed by Mattia Nee.
+Pleias-RAG-Library was developed by Mattia Nee. This repository contains detail and documentations about the library. For more information about the models, their training and their expected performance, please refer to the [model card](https://github.com/Pleias/Pleias-RAG-Library/blob/main/Pleias_RAG_Model_Family.pdf).
+
+A [colab notebook](https://colab.research.google.com/drive/1oG0qq0I1fSEV35ezSah-a335bZqmo4_7?usp=sharing) is available for easy tests and experimentations.
 
 ## Table of Contents
 - [Features](#features)
