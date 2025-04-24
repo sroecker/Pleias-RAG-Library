@@ -9,7 +9,7 @@ Pleias-RAG-Library was developed by Mattia Nee. This repository contains detail 
 For more information about the models, their training and their expected performance, please refer to the [model card](https://github.com/Pleias/Pleias-RAG-Library/blob/main/Pleias_RAG_Model_Family.pdf).
 
 <p align="center">
-  <img width="80%" src="pleias_benchmark.png">
+  <img width="60%" src="pleias_benchmark.png">
 </p>
 
 ## Table of Contents
