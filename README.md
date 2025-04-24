@@ -1,6 +1,6 @@
 # Pleias-RAG-Library
 
-A library for API interaction with custom Pleias RAG models that generate high-quality, factual responses with clear source citations.
+A library for API interaction with custom Pleias RAG models that generate high-quality, factual responses backed up by literal quotations.
 
 Pleias-RAG-Library was developed by Mattia Nee.
 
