@@ -285,6 +285,7 @@ class RAGWithCitations:
 
         # Define other section patterns to extract
         section_patterns = {
+            'query_analysis': r'<\|query_analysis_start\|>(.*?)<\|query_analysis_end\|>',
             'query_report': r'<\|query_report_start\|>(.*?)<\|query_report_end\|>',
             'source_analysis': r'<\|source_analysis_start\|>(.*?)<\|source_analysis_end\|>',
             'draft': r'<\|draft_start\|>(.*?)<\|draft_end\|>',
