@@ -8,7 +8,8 @@ setup(
         "torch>=2.0.0",
         "transformers>=4.30.0",
         "regex>=2023.0.0",
-        "vllm>=0.2.0",
+        "vllm==0.8.4
+",
     ],
 
     author="Your Name",
