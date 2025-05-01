@@ -6,7 +6,7 @@ A library for API interaction with custom Pleias RAG models that generate high-q
 
 Pleias-RAG-Library was developed by Mattia Nee. This repository contains detail and documentations about the library. A [Colab notebook](https://colab.research.google.com/drive/1oG0qq0I1fSEV35ezSah-a335bZqmo4_7?usp=sharing) is available for easy tests and experimentations.
 
-For more information about the models, their training and their expected performance, please refer to the [model card](https://github.com/Pleias/Pleias-RAG-Library/blob/main/Pleias_RAG_Model_Family.pdf).
+For more information about the models, their training and their expected performance, please refer to the [model card](https://arxiv.org/abs/2504.18225).
 
 <p align="center">
   <img width="60%" src="pleias_benchmark.png">
