@@ -14,7 +14,9 @@ class RAGWithCitations:
         trust_remote_code: bool = True,
         hf_token=None,
         models_dir="./pleias_models",
-        backend: Optional[Literal["vllm", "transformers", "llama_cpp"]] = None
+        #remote_host = "http://0.0.0.0:8000",
+        remote_host = "http://hyperion:8000",
+        backend: Optional[Literal["vllm", "remote_vllm", "transformers", "llama_cpp"]] = None
     ):
         """
         Initialize the RAG Generator with either vLLM (if CUDA available) or transformers.
@@ -57,6 +59,7 @@ class RAGWithCitations:
         self.top_p = top_p
         self.repetition_penalty = repetition_penalty
         self.trust_remote_code = trust_remote_code
+        self.remote_host = remote_host
 
         # Check if CUDA is available
         self.cuda_available = torch.cuda.is_available()
@@ -64,6 +67,7 @@ class RAGWithCitations:
 
         backends_init = {
             "vllm": self._init_vllm, 
+            "remote_vllm": self._init_remote_vllm, 
             "transformers": self._init_transformers,
             "llama_cpp": self._init_llama_cpp
                         }
@@ -104,6 +108,26 @@ class RAGWithCitations:
             skip_special_tokens=False,
             stop_token_ids=[tokenizer.eos_token_id]
         )
+
+    def _init_remote_vllm(self):
+        """
+        Initialize using remote vLLM for GPU acceleration.
+        This method sets up the remote vLLM endpoint .
+        """
+
+        from openai import OpenAI
+
+        # Modify OpenAI's API key and API base to use vLLM's API server.
+        openai_api_key = "EMPTY"
+        openai_api_base = self.remote_host+"/v1"
+        client = OpenAI(
+            api_key=openai_api_key,
+            base_url=openai_api_base,
+        )
+        self.llm = client
+        
+        print("Remote vLLM endpoint set successfully")
+
 
     def _init_transformers(self):
         """
@@ -188,6 +212,23 @@ class RAGWithCitations:
         """
         outputs = self.llm.generate(formatted_prompt, self.sampling_params)
         return outputs[0].outputs[0].text
+ 
+    def _generate_remote_vllm(self, formatted_prompt: str) -> str:
+        """
+        Generate text using remote vLLM backend.
+
+        This method handles text generation when using the remote vLLM backend.
+
+        Args:
+            formatted_prompt: The properly formatted input prompt
+
+        Returns:
+            Generated text response
+        """
+        response = self.llm.completions.create(model=self.model_path,
+                                      prompt=formatted_prompt)
+        return response.choices[0].text
+
 
     def _generate_transformers(self, formatted_prompt: str) -> str:
         """
@@ -418,6 +459,7 @@ class RAGWithCitations:
         # Generate response using the appropriate backend
         backends_generation = {
             "vllm": self._generate_vllm, 
+            "remote_vllm": self._generate_remote_vllm, 
             "transformers": self._generate_transformers,
             "llama_cpp": self._generate_llama_cpp
                         }
